@@ -2,7 +2,7 @@ const router = require('express').Router()
 const bycrypt = require('bcrypt.js')
 const Users = require('../users/users-model')
 const tokenBuilder = require('./auth-helpers')
-const {} = require('./auth-middleware')
+const { checkUsernameExists, checkUsernameFree, notEmpty } = require('./auth-middleware')
 
 
 router.post('/register', (req, res) => {
