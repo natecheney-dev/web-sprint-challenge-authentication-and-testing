@@ -3,11 +3,13 @@ const User = require("../users/users-model");
 const checkUsernameFree = async (req, res, next) => {
     try {
         const { username } = req.body
-        const [existing_username] = await User.findBy({ username })
-        if (existing_username) {
-            return next({ status: 422, message: `username taken` })
+        const [existing_user] = await User.findBy({username})
+        if (!existing_user) {
+            next()
         }
-        else next()
+        else {
+          next({ status: 422, message: 'username taken' })
+        }
     }
     catch (err) {
         next(err)
